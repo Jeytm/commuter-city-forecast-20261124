@@ -6,6 +6,11 @@ import { mkdirSync, writeFileSync } from "node:fs";
 const entry =
   "In Drowsington, expect light rain, heavy eyelids, and a 90% chance your bus arrives the very second you give up and start walking.";
 
+// Gate: the bounty requires a single line of 1–140 characters.
+if (entry.length < 1 || entry.length > 140 || entry.includes("\n")) {
+  throw new Error(`Entry violates the 1–140 char single-line gate (${entry.length} chars)`);
+}
+
 mkdirSync("/output", { recursive: true });
 writeFileSync("/output/entry.txt", entry, "utf8");
 console.log(`Wrote ${entry.length} chars to /output/entry.txt`);
